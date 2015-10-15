@@ -1542,6 +1542,12 @@ if [ "x$SHELL" != "x/bin/bash" ]; then
     esac
 fi
 
+#Include extra functions files located under vendor functions folder
+for f in $(gettop)/vendor/krexus/utils/functions/*; do
+   . $f 2> /dev/null
+done
+unset f
+
 # Execute the contents of any vendorsetup.sh files we can find (exluding generic vendorsetups).
 for f in `test -d device && find -L device -maxdepth 4 -name 'vendorsetup.sh' ! -path '*/generic/*' 2> /dev/null | sort` \
          `test -d vendor && find -L vendor -maxdepth 4 -name 'vendorsetup.sh' 2> /dev/null | sort`
